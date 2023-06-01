@@ -16,12 +16,12 @@ public class MetricController {
 
     private final MetricService service;
 
-    @GetMapping
+    @GetMapping("/peek")
     public List<Metric> getMetrics(){
         return service.getMetrics();
     }
 
-    @PostMapping
+    @PostMapping("/new")
     public void postMetric(@RequestBody MetricDTO metricDTO){
         service.postMetric(metricDTO);
     }
