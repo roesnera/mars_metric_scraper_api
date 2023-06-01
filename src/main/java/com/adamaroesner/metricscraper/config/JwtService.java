@@ -6,6 +6,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +18,12 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
+@RequiredArgsConstructor
 public class JwtService {
 
+    private final SecretConfig config;
+
     // this is generated using the following site https://allkeysgenerator.com/random/security-encryption-key-generator.aspx
-    private static final String SECRET_KEY = "7638792F423F4528482B4D6251655368566D597133743677397A24432646294A";
 
     // throughout this program, you will see the term Claims
     // claims are part of a JWT that make assertions about the requesting party
@@ -109,7 +113,7 @@ public class JwtService {
     // creates a bytes array from our generated, 256-bit secret key
     // converts that array into a Key object using an algorithm from Keys and returns it
     private Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(config.secret());
 
         return Keys.hmacShaKeyFor(keyBytes);
     }
