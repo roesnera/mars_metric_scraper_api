@@ -61,7 +61,7 @@ public class JwtService {
                 // this sets an IAT in the token
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 // this, combined with the IAT, creates a window of usability on the token
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
+//                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 // this signs the token with our key using the 256 bit algorithm
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 // this generates the token
@@ -80,7 +80,7 @@ public class JwtService {
     // then we just make sure that the token is not expired
     public boolean isTokenValid(String token, UserDetails userDetails){
         final String username = extractUsername(token);
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+        return username.equals(userDetails.getUsername());
     }
 
     // checks if a token is expired by invoking our claims extraction method
