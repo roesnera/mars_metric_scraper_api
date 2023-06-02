@@ -23,3 +23,4 @@ target/
 .vscode/
 
 secrets.properties
+aws rds generated password.txt

@@ -25,6 +25,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authorize) -> authorize
                                 .requestMatchers("/api/v1/auth/*", "/api/v1/metrics/peek").permitAll()
                                 .requestMatchers("/api/v1/metrics/new").authenticated()
+                                .requestMatchers("/**").permitAll()
 //                                .requestMatchers("/api/v1/metrics/new/").authenticated()
                         )
                 // based on this page https://docs.spring.io/spring-security/reference/migration/servlet/session-management.html#page-title
